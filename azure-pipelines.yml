@@ -4,6 +4,6 @@ stages:
   jobs:
   - template: ./tiledb-feedstock/azure-pipelines.yml
 
-- stage: tiledb-py
+- stage: tiledb_py
   jobs:
   - template: ./tiledb-py-feedstock/azure-pipelines.yml
