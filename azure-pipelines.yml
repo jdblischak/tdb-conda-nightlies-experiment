@@ -1,0 +1,9 @@
+
+stages:
+- stage: libtiledb
+  jobs:
+  - template: ./tiledb-feedstock/azure-pipelines.yml
+
+- stage: tiledb-py
+  jobs:
+  - template: ./tiledb-py-feedstock/azure-pipelines.yml
