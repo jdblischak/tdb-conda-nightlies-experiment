@@ -3,7 +3,9 @@ stages:
 - stage: libtiledb
   jobs:
   - template: ./tiledb-feedstock/azure-pipelines.yml
+    workdingDirectory: tiledb-feedstock/
 
 - stage: tiledb_py
   jobs:
   - template: ./tiledb-py-feedstock/azure-pipelines.yml
+    workdingDirectory: tiledb-py-feedstock/
