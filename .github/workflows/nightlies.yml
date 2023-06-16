@@ -7,8 +7,14 @@ defaults:
     shell: bash -l {0}
 jobs:
   nightlies:
-    runs-on: ubuntu-latest
-    name: Build nightly conda binaries
+    runs-on: ${{ matrix.config.os }}
+    name: Build nightly conda binaries ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: macos-latest}
+          - {os: ubuntu-latest}
     env:
       TZ: "America/New_York"
     steps:
@@ -30,4 +36,4 @@ jobs:
       - name: Build tiledb-py
         run: conda mambabuild tiledb-py/
       - name: View binaries
-        run: ls $CONDA_PREFIX/conda-bld/linux-64/
+        run: ls $CONDA_PREFIX/conda-bld/*64/
