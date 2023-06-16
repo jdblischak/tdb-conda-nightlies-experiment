@@ -2,6 +2,9 @@ name: Build conda nightlies
 on:
   push:
   workflow_dispatch:
+defaults:
+  run:
+    shell: bash -l {0}
 jobs:
   nightlies:
     runs-on: ubuntu-latest
