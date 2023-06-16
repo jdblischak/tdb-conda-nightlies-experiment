@@ -1,0 +1,30 @@
+name: Build conda nightlies
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  nightlies:
+    runs-on: ubuntu-latest
+    name: Build nightly conda binaries
+    env:
+      TZ: "America/New_York"
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install conda-smithy and deps with micromamba
+        uses: mamba-org/provision-with-micromamba@main
+        with:
+          environment-file: false
+          environment-name: env
+          extra-specs: |
+            boa
+            conda-build
+            conda-forge-pinning
+            conda-smithy
+          channels: conda-forge
+          cache-env: true
+      - name: Build libtiledb
+        run: conda mambabuild tiledb/
+      - name: Build tiledb-py
+        run: conda mambabuild tiledb-py/
+      - name: View binaries
+        run: ls $CONDA_PREFIX/conda-bld/linux-64/
